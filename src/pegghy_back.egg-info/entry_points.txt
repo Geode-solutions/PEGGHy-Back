@@ -1,2 +1,0 @@
-[console_scripts]
-pegghy-back = pegghy_back.app:run_server
