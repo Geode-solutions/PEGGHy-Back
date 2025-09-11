@@ -11,9 +11,6 @@ from opengeodeweb_back.routes import blueprint_routes
 from werkzeug.exceptions import HTTPException
 from werkzeug.exceptions import HTTPException
 
-# Local libraries
-import pegghy_back.routes.blueprint_pegghy as blueprint_pegghy
-
 """ Global config """
 app = flask.Flask(__name__)
 
@@ -39,12 +36,6 @@ app.register_blueprint(
     name="opengeodeweb_back",
 )
 
-app.register_blueprint(
-    blueprint_pegghy.routes,
-    url_prefix="/pegghy_back",
-    name="pegghy",
-)
-
 if FLASK_DEBUG == False:
     utils_functions.set_interval(
         utils_functions.kill_task, SECONDS_BETWEEN_SHUTDOWNS, app
@@ -64,7 +55,7 @@ def root():
 
 def run_server():
     parser = argparse.ArgumentParser(
-        prog="pegghy-Back", description="Backend server for pegghy"
+        prog="pegghy-back", description="Backend server for pegghy"
     )
     parser.add_argument("--host", type=str, default=DEFAULT_HOST, help="Host to run on")
     parser.add_argument(

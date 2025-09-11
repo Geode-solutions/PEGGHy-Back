@@ -1,0 +1,31 @@
+name: CICD
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/next' || github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.TOKEN }}
+      - name: Merge master -> next
+        if: github.ref == 'refs/heads/master'
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: master
+          target_branch: next
+          github_token: ${{ secrets.TOKEN }}
+
+  docker-build-squash-push:
+    uses: Geode-solutions/actions/.github/workflows/docker-build-squash-push.yml@master
+    if: github.ref == 'refs/heads/next' || github.ref == 'refs/heads/master'
+    with:
+      tag: ${{ github.ref_name }}
+    secrets:
+      TOKEN: ${{secrets.GITHUB_TOKEN}}
