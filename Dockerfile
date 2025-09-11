@@ -2,6 +2,7 @@ FROM python:3.12-slim
 ARG TOKEN
 
 WORKDIR /server
+
 COPY . .
 
 # Installation des dépendances Python et système
