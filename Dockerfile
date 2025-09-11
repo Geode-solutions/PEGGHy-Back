@@ -11,7 +11,7 @@ RUN pip3 install --no-cache-dir -r requirements.txt && \
     apt-get update && \
     apt-get install -y libgomp1 git
 
-RUN git clone https://BotellaA:$TOKEN@github.com/Geode-solutions/PEGGHy-Data
+RUN git clone https://oauth2:$TOKEN@github.com/Geode-solutions/PEGGHy-Data
 
 # Commande de démarrage
 CMD ["pegghy-back", "--data_folder_path", "/data", "--allowed_origins", "['https://next.pegghy.geode-solutions.com', 'https://pegghy.geode-solutions.com']", "--timeout", "5"]
