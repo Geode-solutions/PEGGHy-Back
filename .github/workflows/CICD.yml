@@ -13,11 +13,6 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.TOKEN }}
-      - name: Python Semantic Release
-        uses: python-semantic-release/python-semantic-release@master
-        id: semantic-release
-        with:
-          github_token: ${{ secrets.TOKEN }}
       - name: Merge master -> next
         if: github.ref == 'refs/heads/master'
         uses: devmasx/merge-branch@master
