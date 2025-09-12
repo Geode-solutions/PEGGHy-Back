@@ -9,7 +9,7 @@ COPY . .
 RUN pip3 install --no-cache-dir -r requirements.txt && \
     pip3 install . && \
     apt-get update && \
-    apt-get install -y libgomp1 curl
+    apt-get install -y libgomp1 git
 
 RUN git clone https://x-access-token:${TOKEN}@github.com/Geode-solutions/PEGGHy-Data.git
 # Commande de démarrage
