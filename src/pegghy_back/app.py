@@ -76,6 +76,13 @@ def run_server():
         help="Path to the folder where data is stored",
     )
     parser.add_argument(
+        "-ufp",
+        "--upload_folder_path",
+        type=str,
+        default=DEFAULT_DATA_FOLDER_PATH,
+        help="Path to the folder where uploads are stored",
+    )
+    parser.add_argument(
         "-origins",
         "--allowed_origins",
         default=ORIGINS,
@@ -89,10 +96,11 @@ def run_server():
     )
     args = parser.parse_args()
     app.config.update(DATA_FOLDER_PATH=args.data_folder_path)
+    app.config.update(UPLOAD_FOLDER=args.upload_folder_path)
     app.config.update(MINUTES_BEFORE_TIMEOUT=args.timeout)
     flask_cors.CORS(app, origins=args.allowed_origins)
     print(
-        f"Host: {args.host}, Port: {args.port}, Debug: {args.debug}, Data folder path: {args.data_folder_path}, Timeout: {args.timeout}, Origins: {args.allowed_origins}",
+        f"Host: {args.host}, Port: {args.port}, Debug: {args.debug}, Data folder path: {args.data_folder_path}, Upload folder path: {args.upload_folder_path},Timeout: {args.timeout}, Origins: {args.allowed_origins}",
         flush=True,
     )
     app.run(debug=args.debug, host=args.host, port=args.port, ssl_context=SSL)
