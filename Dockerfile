@@ -13,7 +13,7 @@ RUN pip3 install --no-cache-dir -r requirements.txt && \
 
 RUN curl -L \
   -H "Accept: application/vnd.github.object" \
-  -H "Authorization: token $TOKEN" \
+  -H "Authorization: Bearer $TOKEN" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   https://api.github.com/repos/Geode-solutions/PEGGHy-Data
 
