@@ -9,13 +9,9 @@ COPY . .
 RUN pip3 install --no-cache-dir -r requirements.txt && \
     pip3 install . && \
     apt-get update && \
-    apt-get install -y libgomp1 curl
+    apt-get install -y libgomp1 git
 
-RUN curl -L \
-  -H "Accept: application/vnd.github.object" \
-  -H "Authorization: token $TOKEN" \
-  -H "X-GitHub-Api-Version: 2022-11-28" \
-  https://api.github.com/repos/Geode-solutions/PEGGHy-Data
+RUN git clone https://x-access-token:${TOKEN}@github.com/Geode-solutions/PEGGHy-Data.git
 
 # Commande de démarrage
 CMD ["pegghy-back", "--data_folder_path", "/data", "--allowed_origins", "['https://next.pegghy.geode-solutions.com', 'https://pegghy.geode-solutions.com']", "--timeout", "5"]
