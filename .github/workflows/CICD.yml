@@ -28,4 +28,4 @@ jobs:
     with:
       tag: ${{ github.ref_name }}
     secrets:
-      TOKEN: ${{secrets.DATA}}
+      TOKEN: ${{secrets.TOKEN}}
