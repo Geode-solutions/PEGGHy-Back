@@ -13,6 +13,20 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.TOKEN }}
+      - name: Python Semantic Release
+        uses: python-semantic-release/python-semantic-release@master
+        id: semantic-release
+        with:
+          github_token: ${{ secrets.TOKEN }}
+      - name: Build
+        run: |
+          python3 -m pip install --upgrade build
+          python3 -m build
+      - name: Upload PYPI
+        if: steps.semantic-release.outputs.released == 'true'
+        run: |
+          python3 -m pip install twine==6.0.1
+          python3 -m twine upload --repository pypi dist/* -u __token__ -p ${{ secrets.PYPI_TOKEN }}
       - name: Merge master -> next
         if: github.ref == 'refs/heads/master'
         uses: devmasx/merge-branch@master
