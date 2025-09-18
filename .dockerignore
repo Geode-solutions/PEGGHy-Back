@@ -6,3 +6,4 @@ tests
 uploads
 .vscode
 lock
+/pegghy_back.egg-info
