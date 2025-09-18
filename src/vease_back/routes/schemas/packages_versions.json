@@ -1,9 +1,0 @@
-{
-  "$id": "/pegghy_back/packages_versions",
-  "route": "/packages_versions",
-  "methods": [
-    "GET"
-  ],
-  "type": "object",
-  "additionalProperties": false
-}
