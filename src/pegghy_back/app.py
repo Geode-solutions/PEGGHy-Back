@@ -11,6 +11,8 @@ from opengeodeweb_back.routes import blueprint_routes
 from werkzeug.exceptions import HTTPException
 from werkzeug.exceptions import HTTPException
 
+from pegghy_back.routes import blueprint_pegghy
+
 """ Global config """
 app = flask.Flask(__name__)
 
@@ -34,6 +36,12 @@ app.register_blueprint(
     blueprint_routes.routes,
     url_prefix="/opengeodeweb_back",
     name="opengeodeweb_back",
+)
+
+app.register_blueprint(
+    blueprint_pegghy.routes,
+    url_prefix="/pegghy_back",
+    name="pegghy_back",
 )
 
 if FLASK_DEBUG == False:
