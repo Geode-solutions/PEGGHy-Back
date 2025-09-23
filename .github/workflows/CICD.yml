@@ -57,7 +57,9 @@ jobs:
         docker build -t pegghy-back .
         docker tag pegghy-back:latest public.ecr.aws/m4f6w3w9/pegghy-back:${{github.ref_name}}
         docker push public.ecr.aws/m4f6w3w9/pegghy-back:${{github.ref_name}}
-
+      env:
+        TOKEN: ${{secrets.TOKEN}}
+        LICENSE_TOKEN: ${{secrets.TOKEN}}
   docker-build-squash-push:
     uses: Geode-solutions/actions/.github/workflows/docker-build-squash-push.yml@master
     if: github.ref == 'refs/heads/next' || github.ref == 'refs/heads/master'
