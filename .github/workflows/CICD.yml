@@ -35,6 +35,16 @@ jobs:
           from_branch: master
           target_branch: next
           github_token: ${{ secrets.TOKEN }}
+  
+
+  docker-build-squash-push:
+    uses: Geode-solutions/actions/.github/workflows/docker-build-squash-push.yml@master
+    if: github.ref == 'refs/heads/next' || github.ref == 'refs/heads/master'
+    with:
+      tag: ${{ github.ref_name }}
+    secrets:
+      TOKEN: ${{secrets.TOKEN}}
+      LICENSE_TOKEN: ${{secrets.TOKEN}}
 
   amazon-ecr:
     runs-on: ubuntu-latest
@@ -46,29 +56,14 @@ jobs:
         fetch-depth: 0
         token: ${{ secrets.TOKEN }}
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
+      uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
     - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v2
-    - name: Build, tag, and push docker image to Amazon ECR
-      env:
-        REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        REPOSITORY: pegghy-back
-        IMAGE_TAG: ${{ github.ref_name }}
       run: |
-        docker build --secret token=${secrets.TOKEN} -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-        docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
-  
-
-  docker-build-squash-push:
-    uses: Geode-solutions/actions/.github/workflows/docker-build-squash-push.yml@master
-    if: github.ref == 'refs/heads/next' || github.ref == 'refs/heads/master'
-    with:
-      tag: ${{ github.ref_name }}
-    secrets:
-      TOKEN: ${{secrets.TOKEN}}
-      LICENSE_TOKEN: ${{secrets.TOKEN}}
+        aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/m4f6w3w9
+        docker build -t pegghy-back .
+        docker tag pegghy-back:latest public.ecr.aws/m4f6w3w9/pegghy-back:${{github.ref_name}}
+        docker push public.ecr.aws/m4f6w3w9/pegghy-back:${{github.ref_name}}
