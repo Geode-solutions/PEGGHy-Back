@@ -67,3 +67,6 @@ jobs:
         docker build -t pegghy-back .
         docker tag pegghy-back:latest public.ecr.aws/m4f6w3w9/pegghy-back:${{github.ref_name}}
         docker push public.ecr.aws/m4f6w3w9/pegghy-back:${{github.ref_name}}
+      env: 
+        TOKEN: ${{secrets.TOKEN}}
+        LICENSE_TOKEN: ${{secrets.TOKEN}}
