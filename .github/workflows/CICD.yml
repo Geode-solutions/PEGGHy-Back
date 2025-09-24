@@ -65,6 +65,6 @@ jobs:
       run: |
         aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/m4f6w3w9
         docker build --secret id=${{secrets.TOKEN}} -t pegghy-back .
-        docker secret rm secret.json
+        docker config rm
         docker tag pegghy-back:latest public.ecr.aws/m4f6w3w9/pegghy-back:${{github.ref_name}}
         docker push public.ecr.aws/m4f6w3w9/pegghy-back:${{github.ref_name}}
