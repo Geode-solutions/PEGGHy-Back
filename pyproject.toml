@@ -24,7 +24,7 @@ classifiers = [
 "Bug Tracker" = "https://github.com/Geode-solutions/PEGGHy-back/issues"
 
 [project.scripts]
-pegghy-back = "pegghy_back.app:run_server"
+pegghy-back = "pegghy_back.app:run_pegghy_server"
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
