@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.0.0-rc.4 (2025-10-17)
+
+### Bug Fixes
+
+- **Database**: Support database design
+  ([`e9fabbe`](https://github.com/Geode-solutions/PEGGHy-Back/commit/e9fabbe00f2abd6ce78187639835aa236b7292e9))
+
+
 ## v1.0.0-rc.3 (2025-09-18)
 
 ### Bug Fixes
