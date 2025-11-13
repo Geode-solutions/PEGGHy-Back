@@ -137,7 +137,6 @@ output
 __pycache__
 .vscode
 uploads
-schemas.json
 *.egg-info
 lock
 time
