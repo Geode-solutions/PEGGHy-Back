@@ -1,0 +1,13 @@
+{
+  "pegghy_back": {
+    "healthcheck": {
+      "$id": "pegghy_back/healthcheck",
+      "route": "/healthcheck",
+      "methods": [
+        "GET"
+      ],
+      "type": "object",
+      "additionalProperties": false
+    }
+  }
+}
