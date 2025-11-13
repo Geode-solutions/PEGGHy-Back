@@ -2,7 +2,6 @@
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
-
 [project]
 name = "pegghy_back"
 version = "0.0.0"
@@ -32,16 +31,3 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 "pegghy_back.routes.schemas" = ["*.json"]
-
-[tool.semantic_release]
-version_toml = ["pyproject.toml:project.version"]
-
-[tool.semantic_release.remote.token]
-env = "GH_TOKEN"
-
-[tool.semantic_release.branches.master]
-match = "master"
-
-[tool.semantic_release.branches.next]
-match = "next"
-prerelease = true
