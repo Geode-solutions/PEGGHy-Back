@@ -1,5 +1,5 @@
 import pytest
-from src.pegghy_back.app import app
+from pegghy_back.app import app
 
 
 @pytest.fixture
