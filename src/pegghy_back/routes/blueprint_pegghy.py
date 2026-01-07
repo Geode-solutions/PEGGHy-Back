@@ -3,7 +3,7 @@ import os
 
 # Third party imports
 import flask
-import flask_cors
+import flask_cors  # type: ignore
 import json
 
 schemas = os.path.join(os.path.dirname(__file__), "schemas")
