@@ -13,6 +13,8 @@ from pegghy_back.app import run_pegghy_server
 from opengeodeweb_microservice.database.connection import init_database, get_session
 from opengeodeweb_microservice.database.data import Data
 
+from flask.testing import FlaskClient
+
 TEST_ID = "1"
 
 
@@ -47,16 +49,21 @@ def configure_test_environment() -> Generator[None, None, None]:
 
 
 @pytest.fixture
-def client():
+def client() -> Generator[FlaskClient, None, None]:
     app.config["REQUEST_COUNTER"] = 0
     app.config["LAST_REQUEST_TIME"] = time.time()
     client = app.test_client()
-    client.headers = {"Content-type": "application/json", "Accept": "application/json"}
+    client.environ_base.update(
+        {
+            "HTTP_CONTENT_TYPE": "application/json",
+            "HTTP_ACCEPT": "application/json",
+        }
+    )
     yield client
 
 
 @pytest.fixture(autouse=True)
-def clean_database():
+def clean_database() -> Generator[None, None, None]:
     with app.app_context():
         session = get_session()
         if session:
@@ -73,11 +80,11 @@ def clean_database():
 
 
 @pytest.fixture
-def app_context():
+def app_context() -> Generator[None, None, None]:
     with app.app_context():
         yield
 
 
 @pytest.fixture
-def test_id():
+def test_id() -> str:
     return TEST_ID
