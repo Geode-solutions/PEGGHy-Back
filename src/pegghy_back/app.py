@@ -1,5 +1,5 @@
 # Third parties
-from opengeodeweb_back.app import app, run_server
+from opengeodeweb_back.app import app as app, run_server
 
 from pegghy_back.routes import blueprint_pegghy
 
