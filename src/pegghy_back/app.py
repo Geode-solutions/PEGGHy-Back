@@ -5,12 +5,6 @@ from opengeodeweb_back.app import create_app, run_server, register_ogw_back_blue
 # Local application imports
 from pegghy_back.routes import blueprint_pegghy
 
-app.register_blueprint(
-    blueprint_pegghy.routes,
-    url_prefix="/pegghy_back",
-    name="pegghy_back",
-)
-
 
 def run_pegghy_server() -> flask.Flask:
     app = create_app(__name__)
