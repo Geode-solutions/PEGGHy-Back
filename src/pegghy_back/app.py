@@ -1,6 +1,8 @@
 # Third parties
-from opengeodeweb_back.app import app, run_server
+import flask
+from opengeodeweb_back.app import create_app, run_server, register_ogw_back_blueprints
 
+# Local application imports
 from pegghy_back.routes import blueprint_pegghy
 
 app.register_blueprint(
@@ -10,8 +12,15 @@ app.register_blueprint(
 )
 
 
-def run_pegghy_server() -> None:
-    run_server()
+def run_pegghy_server() -> flask.Flask:
+    app = create_app(__name__)
+    app.register_blueprint(
+        blueprint_pegghy.routes,
+        url_prefix="/pegghy_back",
+        name="pegghy_back",
+    )
+    run_server(app)
+    return app
 
 
 if __name__ == "__main__":
