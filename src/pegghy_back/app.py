@@ -8,6 +8,7 @@ from pegghy_back.routes import blueprint_pegghy
 
 def run_pegghy_server() -> flask.Flask:
     app = create_app(__name__)
+    register_ogw_back_blueprints(app)
     app.register_blueprint(
         blueprint_pegghy.routes,
         url_prefix="/pegghy_back",
