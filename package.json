@@ -2,6 +2,32 @@
   "name": "pegghy-back",
   "version": "0.0.0",
   "description": "",
+  "homepage": "https://github.com/Geode-solutions/PEGGHy-Back",
+  "bugs": {
+    "url": "https://github.com/Geode-solutions/PEGGHy-Back/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Geode-solutions",
+    "email": "contact@geode-solutions.com",
+    "url": "https://geode-solutions.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Geode-solutions/PEGGHy-Back.git"
+  },
+  "files": [
+    "pegghy_back_schemas.json"
+  ],
+  "exports": {
+    "./pegghy_back_schemas.json": {
+      "import": "./pegghy_back_schemas.json",
+      "require": "./pegghy_back_schemas.json"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "json": "node ./node_modules/@geode/opengeodeweb-microservice/generate_schemas.js pegghy_back routes route /",
     "test": "npm run json",
@@ -9,31 +35,5 @@
   },
   "dependencies": {
     "@geode/opengeodeweb-microservice": "0.0.0"
-  },
-  "exports": {
-    "./pegghy_back_schemas.json": {
-      "import": "./pegghy_back_schemas.json",
-      "require": "./pegghy_back_schemas.json"
-    }
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Geode-solutions/PEGGHy-Back.git"
-  },
-  "author": {
-    "name": "Geode-solutions",
-    "email": "contact@geode-solutions.com",
-    "url": "https://geode-solutions.com/"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Geode-solutions/PEGGHy-Back/issues"
-  },
-  "homepage": "https://github.com/Geode-solutions/PEGGHy-Back",
-  "publishConfig": {
-    "access": "public"
-  },
-  "files": [
-    "pegghy_back_schemas.json"
-  ]
+  }
 }
