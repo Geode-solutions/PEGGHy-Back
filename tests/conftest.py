@@ -9,7 +9,7 @@ from typing import Generator
 import pytest
 
 # Local application imports
-from pegghy_back.app import run_pegghy_server
+from pegghy_back.app import create_pegghy_server
 from opengeodeweb_microservice.database.connection import init_database, get_session
 from opengeodeweb_microservice.database.data import Data
 
@@ -17,10 +17,11 @@ from flask.testing import FlaskClient
 
 TEST_ID = "1"
 
+app = create_pegghy_server()
+
 
 @pytest.fixture(scope="session", autouse=True)
 def configure_test_environment() -> Generator[None, None, None]:
-    app = run_pegghy_server()
     base_path = Path(__file__).parent
     test_data_path = base_path / "data"
     data_folder = "./data/"
