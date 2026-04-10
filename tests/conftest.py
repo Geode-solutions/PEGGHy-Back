@@ -9,7 +9,7 @@ from typing import Generator
 import pytest
 
 # Local application imports
-from pegghy_back.app import run_pegghy_server
+from pegghy_back.app import create_pegghy_server
 from opengeodeweb_microservice.database.connection import init_database, get_session
 from opengeodeweb_microservice.database.data import Data
 
