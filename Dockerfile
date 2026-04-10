@@ -18,6 +18,7 @@ RUN pyinstaller \
 ENV PYTHON_ENV="prod"
 
 FROM debian:12-slim
+ARG TOKEN
 
 COPY --from=builder /app/dist/pegghy-back /usr/local/bin/pegghy-back
 RUN chmod +x /usr/local/bin/pegghy-back
@@ -31,5 +32,5 @@ ENV PYTHON_ENV=prod
 ENTRYPOINT ["/usr/local/bin/pegghy-back"]
 CMD ["--data_folder_path", "/data", \
     "--timeout", "5", \
-    "--upload_folder_path", "/server/PEGGHy-Data"]
+    "--upload_folder_path", "PEGGHy-Data"]
 
