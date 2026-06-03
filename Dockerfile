@@ -23,7 +23,7 @@ ARG TOKEN
 COPY --from=builder /app/dist/pegghy-back /usr/local/bin/pegghy-back
 RUN chmod +x /usr/local/bin/pegghy-back
 
-RUN apt-get update && apt-get install -y git
+RUN apt-get update && apt-get install -y git libgomp1
 RUN git clone https://x-access-token:${TOKEN}@github.com/Geode-solutions/PEGGHy-Data.git
 
 EXPOSE 5000
