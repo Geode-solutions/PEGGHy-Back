@@ -24,7 +24,9 @@ app = create_pegghy_server()
 def configure_test_environment() -> Generator[None, None, None]:
     base_path = Path(__file__).parent
     test_data_path = base_path / "data"
-    data_folder = "./data/"
+    project_folder_path = os.path.abspath("./project")
+    data_folder_path = os.path.join(project_folder_path, "data")
+    upload_folder_path = os.path.join(project_folder_path, "uploads")
 
     shutil.rmtree(data_folder, ignore_errors=True)
     if test_data_path.exists():
@@ -33,8 +35,9 @@ def configure_test_environment() -> Generator[None, None, None]:
     # Configure app for testing
     app.config["TESTING"] = True
     app.config["SERVER_NAME"] = "TEST"
-    app.config["DATA_FOLDER_PATH"] = data_folder
-    app.config["UPLOAD_FOLDER"] = "./tests/data/"
+    app.config["PROJECT_FOLDER_PATH"] = project_folder_path
+    app.config["DATA_FOLDER_PATH"] = data_folder_path
+    app.config["UPLOAD_FOLDER_PATH"] = upload_folder_path
 
     db_path = os.path.join(data_folder, "project.db")
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
