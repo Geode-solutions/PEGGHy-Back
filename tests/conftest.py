@@ -30,7 +30,9 @@ def configure_test_environment() -> Generator[None, None, None]:
 
     shutil.rmtree(data_folder_path, ignore_errors=True)
     if test_data_path.exists():
-        shutil.copytree(test_data_path, f"{data_folder_path}{TEST_ID}/", dirs_exist_ok=True)
+        shutil.copytree(
+            test_data_path, f"{data_folder_path}{TEST_ID}/", dirs_exist_ok=True
+        )
 
     # Configure app for testing
     app.config["TESTING"] = True
