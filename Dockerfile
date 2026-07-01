@@ -30,7 +30,8 @@ EXPOSE 5000
 ENV PYTHON_ENV=prod
 
 ENTRYPOINT ["/usr/local/bin/pegghy-back"]
-CMD ["--data_folder_path", "/data", \
+CMD ["--project_folder_path", "/data", \
+    "--allowed_origins", "https://next.pegghy.geode-solutions.com", "https://pegghy.geode-solutions.com", \
     "--timeout", "5", \
     "--upload_folder_path", "PEGGHy-Data"]
 

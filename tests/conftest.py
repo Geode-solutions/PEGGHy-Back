@@ -24,19 +24,24 @@ app = create_pegghy_server()
 def configure_test_environment() -> Generator[None, None, None]:
     base_path = Path(__file__).parent
     test_data_path = base_path / "data"
-    data_folder = "./data/"
+    project_folder_path = os.path.abspath("./project")
+    data_folder_path = os.path.join(project_folder_path, "data")
+    upload_folder_path = os.path.join(project_folder_path, "uploads")
 
-    shutil.rmtree(data_folder, ignore_errors=True)
+    shutil.rmtree(data_folder_path, ignore_errors=True)
     if test_data_path.exists():
-        shutil.copytree(test_data_path, f"{data_folder}{TEST_ID}/", dirs_exist_ok=True)
+        shutil.copytree(
+            test_data_path, f"{data_folder_path}{TEST_ID}/", dirs_exist_ok=True
+        )
 
     # Configure app for testing
     app.config["TESTING"] = True
     app.config["SERVER_NAME"] = "TEST"
-    app.config["DATA_FOLDER_PATH"] = data_folder
-    app.config["UPLOAD_FOLDER"] = "./tests/data/"
+    app.config["PROJECT_FOLDER_PATH"] = project_folder_path
+    app.config["DATA_FOLDER_PATH"] = data_folder_path
+    app.config["UPLOAD_FOLDER_PATH"] = upload_folder_path
 
-    db_path = os.path.join(data_folder, "project.db")
+    db_path = os.path.join(data_folder_path, "project.db")
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
 
@@ -45,8 +50,8 @@ def configure_test_environment() -> Generator[None, None, None]:
 
     yield
 
-    if os.path.exists(data_folder):
-        shutil.rmtree(data_folder, ignore_errors=True)
+    if os.path.exists(data_folder_path):
+        shutil.rmtree(data_folder_path, ignore_errors=True)
 
 
 @pytest.fixture
