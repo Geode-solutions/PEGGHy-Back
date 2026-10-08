@@ -1,6 +1,6 @@
 # Third parties
 import flask
-from opengeodeweb_back.app import create_app, run_server, register_ogw_back_blueprints
+from opengeodeweb_back.app import create_app, register_ogw_back_blueprints, run_server
 
 # Local application imports
 from pegghy_back.routes import blueprint_pegghy

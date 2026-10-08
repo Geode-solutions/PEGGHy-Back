@@ -1,14 +1,14 @@
 # Standard library imports
-import os
+import json
+from pathlib import Path
 
 # Third party imports
 import flask
-import flask_cors  # type: ignore
-import json
+import flask_cors  # type: ignore[import-untyped]
 
-schemas = os.path.join(os.path.dirname(__file__), "schemas")
+schemas = Path(__file__).parent / "schemas"
 
-with open(os.path.join(schemas, "healthcheck.json"), "r") as file:
+with (schemas / "healthcheck.json").open() as file:
     healthcheck_json = json.load(file)
 
 routes = flask.Blueprint("pegghy_routes", __name__)
