@@ -11,6 +11,7 @@ RUN pyinstaller \
     --onefile \
     --collect-data opengeodeweb_back \
     --collect-data pegghy_back \
+    --collect-data opengeode \
     --recursive-copy-metadata pegghy_back src/pegghy_back/app.py \
     --distpath dist \
     --name pegghy-back \

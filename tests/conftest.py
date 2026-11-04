@@ -2,13 +2,12 @@
 import os
 import shutil
 import time
-from collections.abc import Generator
 from contextlib import suppress
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 # Third party imports
 import pytest
-from flask.testing import FlaskClient
 from opengeodeweb_microservice.database.connection import get_session, init_database
 from opengeodeweb_microservice.database.data import Data
 from sqlalchemy.exc import SQLAlchemyError
@@ -16,13 +15,18 @@ from sqlalchemy.exc import SQLAlchemyError
 # Local application imports
 from pegghy_back.app import create_pegghy_server
 
+if TYPE_CHECKING:
+    from collections.abc import Generator
+
+    from flask.testing import FlaskClient
+
 TEST_ID = "1"
 
 app = create_pegghy_server()
 
 
 @pytest.fixture(scope="session", autouse=True)
-def configure_test_environment() -> Generator[None, None, None]:
+def configure_test_environment() -> Generator[None]:
     base_path = Path(__file__).parent
     test_data_path = base_path / "data"
     project_folder_path = Path("./project").resolve()
@@ -68,7 +72,7 @@ def client() -> FlaskClient:
 
 
 @pytest.fixture(autouse=True)
-def clean_database() -> Generator[None, None, None]:
+def clean_database() -> Generator[None]:
     with app.app_context():
         session = get_session()
         if session:
@@ -82,7 +86,7 @@ def clean_database() -> Generator[None, None, None]:
 
 
 @pytest.fixture
-def app_context() -> Generator[None, None, None]:
+def app_context() -> Generator[None]:
     with app.app_context():
         yield
 
