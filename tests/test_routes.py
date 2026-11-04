@@ -1,4 +1,7 @@
-from flask.testing import FlaskClient
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from flask.testing import FlaskClient
 
 
 def test_allowed_files(client: FlaskClient) -> None:

@@ -1,9 +1,14 @@
+# Standard library imports
+from typing import TYPE_CHECKING
+
 # Third parties
-import flask
 from opengeodeweb_back.app import create_app, register_ogw_back_blueprints, run_server
 
 # Local application imports
 from pegghy_back.routes import blueprint_pegghy
+
+if TYPE_CHECKING:
+    import flask
 
 
 def create_pegghy_server() -> flask.Flask:
